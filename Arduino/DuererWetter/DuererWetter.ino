@@ -1,10 +1,19 @@
+//GSM
 #include <GSM.h>
 
-#define GSM_PIN ""
+#define GSM_PIN 0
+#define GPRS_APN       "pinternet.interkom.de"
+#define GPRS_LOGIN     ""
+#define GPRS_PASSWORD  ""
 
-#define GPRS_APN       "GPRS_APN"
-#define GPRS_LOGIN     "login"
-#define GPRS_PASSWORD  "password"
+//Sensors
+#define TEMP_PIN -1
+#define HUMIDITY_PIN -1
+#define AIR-QUALITY_PIN -1
+#define AIR-PRESSURE_PIN -1
+#define RAIN_PIN -1
+#define WIND-DIR_PIN -1
+#define WIND-POWER_PIN -1
 
 GSMClient client;
 GPRS gprs;
@@ -13,8 +22,43 @@ GSM gsmAccess;
 char server[] = "wetterstation-duerer.rhcloud.com";
 int port = 80;
 
+int getTemp() {
+  return 0;
+}
+
+int getHumidity() {
+  return 0;
+}
+
+int getAirQuality() {
+  return 0;
+}
+
+int getAirPressure() {
+  return 0;
+}
+
+int getRain() {
+  return 0;
+}
+
+String getWindDir() {
+  return "-1";
+}
+
+int getWindPower() {
+  return 0;
+} 
+
 String getData() {
-  //TO-DO: Implement Sensors!
+  String result = "";
+  result += "temp="     + String(getTemp())         + "&";
+  result += "humidity=" + String(getHumidity())     + "&";
+  result += "airQ="     + String(getAirQuality())   + "&";
+  result += "airP="     + String(getAirPressure())  + "&";
+  result += "rain="     + String(getRain())         + "&";
+  result += "windDir="  + getWindDir()              + "&";
+  result += "wind="     + String(getWindPower())         ;
   return "Hello World";
 }
 

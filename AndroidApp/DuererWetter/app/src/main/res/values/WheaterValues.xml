@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">Dürer-Wetter</string>
+    <string name="kalt">"Es ist kalt draußen!"</string>
+    <string name="warm">"Es ist warm draußen!"</string>
+    <string name="regen">"Es regnet!"</string>
+
+    <integer name="zuKalt">5</integer>
+    <integer name="zuWarm">15</integer>
+</resources>

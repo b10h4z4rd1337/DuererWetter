@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Dürer-Wetter</string>
+    <string name="firstStartText">Ich kann jeden Morgen in der Schulzeit zu einer bestimmten Uhrzeit prüfen, wie das Wetter an der Schule ist, und dich benachrichtigen. Willst du das?</string>
+    <string name="openDrawer">Open Drawer</string>
+    <string name="closeDrawer">Close Drawer</string>
+
+    <string name="drawerNow">Aktuell</string>
+    <string name="drawer24">Letzte 24 Stunden</string>
+    <string name="drawerWeek">Letzte Woche</string>
+    <string name="drawerWeek2">Letzten 2 Wochen</string>
+    <string name="drawerMonth">Letzter Monat</string>
+
+    <string-array name="drawerItems">
+        <item>@string/drawerNow</item>
+        <item>@string/drawer24</item>
+        <item>@string/drawerWeek</item>
+        <item>@string/drawerWeek2</item>
+        <item>@string/drawerMonth</item>
+    </string-array>
 </resources>
