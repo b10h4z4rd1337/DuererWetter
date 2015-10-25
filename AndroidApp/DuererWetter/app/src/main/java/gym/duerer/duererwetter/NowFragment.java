@@ -1,7 +1,5 @@
 package gym.duerer.duererwetter;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -27,22 +25,12 @@ public class NowFragment extends Fragment {
 
         final AppCompatActivity context = (AppCompatActivity) getActivity();
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("default", 0);
-
-        if (sharedPreferences.getBoolean("useService", false)) {
-            context.startService(new Intent(context, SyncService.class));
-        }
-
-        if (!sharedPreferences.getBoolean("firstCompleted", false)) {
-            startActivity(new Intent(context, FirstStartActivity.class));
-        }
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Map<String, String> temp = Data.getAndParseData();
-                    Date date = new Date(Long.parseLong(temp.get("date")) * 1000);
+                    Map<String, String> temp = Data.parse(Data.getData(0));
+                    Date date = new Date(Long.parseLong(temp.get("date")));
                     final String dateString = SimpleDateFormat.getDateTimeInstance().format(date);
 
                     final Map<String, String> map = Data.renameEntries(temp);
@@ -84,7 +72,7 @@ public class NowFragment extends Fragment {
                     context.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, "Dürer-Wetter: Konnte keine Daten abrufen! (" + e.getMessage() + ")", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Konnte keine Daten abrufen! (" + e.getMessage() + ")", Toast.LENGTH_LONG).show();
                         }
                     });
                 }

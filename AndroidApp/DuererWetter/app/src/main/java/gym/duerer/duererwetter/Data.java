@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -30,10 +33,63 @@ public class Data {
         return result;
     }
 
-    public static Map<String, String> getAndParseData() throws Exception {
+    public static WeatherObject[] parseJSONArray(String jsonArray) {
+        ArrayList<WeatherObject> result = new ArrayList<>();
+        String cleanedArray = jsonArray.replace("[", "").replace("]", "").replace("null", "0").replace("},{", "}/{");
+        String[] splitted = cleanedArray.split("/");
+        for (String s : splitted) {
+            String trueJson = s.replace("{", "");
+            trueJson = trueJson.replace("}", "");
+            String[] splitted2 = trueJson.split(",");
+            WeatherObject weatherObject = new WeatherObject();
+
+            for (String ss : splitted2) {
+                String[] temp = ss.split(":");
+                double toSet = Double.parseDouble(temp[1]);
+                switch (temp[0].replace("\"", "")) {
+                    case "temp":
+                        weatherObject.temperature = (float) toSet;
+                        break;
+                    case "humidity":
+                        weatherObject.humidity = (float) toSet;
+                        break;
+                    case "airQ":
+                        weatherObject.airQ = (float) toSet;
+                        break;
+                    case "airP":
+                        weatherObject.airP = (float) toSet;
+                        break;
+                    case "rain":
+                        weatherObject.rain = (float) toSet;
+                        break;
+                    case "wind":
+                        weatherObject.wind = (float) toSet;
+                        break;
+                    case "date":
+                        weatherObject.date = (long) toSet;
+                        break;
+                }
+            }
+            result.add(weatherObject);
+        }
+        Collections.sort(result, new Comparator<WeatherObject>() {
+            @Override
+            public int compare(WeatherObject weatherObject, WeatherObject t1) {
+                return weatherObject.date > t1.date ? 1 : 0;
+            }
+        });
+        return result.toArray(new WeatherObject[result.size()]);
+    }
+
+    public static class WeatherObject {
+        public float temperature, humidity, airQ, airP, rain, wind;
+        public long date;
+    }
+
+    public static String getData(int time) throws Exception {
         StringBuilder result = new StringBuilder();
 
-        URL url = new URL("http://wetterstation-duerer.rhcloud.com/getWeather");
+        URL url = new URL("http://wetterstation-duerer.rhcloud.com/getWeather?option=" + time);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
@@ -44,7 +100,7 @@ public class Data {
         }
         bufferedReader.close();
 
-        return Data.parse(result.toString());
+        return result.toString();
     }
 
     public static Map<String, String> renameEntries(Map<String, String> tempResult) {

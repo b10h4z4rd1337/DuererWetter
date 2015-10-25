@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CharSequence subTitle;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
 
@@ -50,19 +49,19 @@ public class MainActivity extends AppCompatActivity {
                     destination = new NowFragment();
                 } else if (selected.equals(res.getString(R.string.drawer24))) {
                     PastFragment temp = new PastFragment();
-                    temp.setTime(res.getString(R.string.drawer24));
+                    temp.setTime(1);
                     destination = temp;
                 } else if (selected.equals(res.getString(R.string.drawerWeek))) {
                     PastFragment temp = new PastFragment();
-                    temp.setTime(res.getString(R.string.drawerWeek));
+                    temp.setTime(7);
                     destination = temp;
                 } else if (selected.equals(res.getString(R.string.drawerWeek2))) {
                     PastFragment temp = new PastFragment();
-                    temp.setTime(res.getString(R.string.drawerWeek2));
+                    temp.setTime(14);
                     destination = temp;
                 } else if (selected.equals(res.getString(R.string.drawerMonth))) {
                     PastFragment temp = new PastFragment();
-                    temp.setTime(res.getString(R.string.drawerMonth));
+                    temp.setTime(30);
                     destination = temp;
                 }
 
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
                     actionBar.setTitle("Dürer-Wetter");
-                    actionBar.setSubtitle(subTitle);
                 }
             }
 
@@ -94,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
                     actionBar.setTitle("Menü");
-                    subTitle = actionBar.getSubtitle();
                     actionBar.setSubtitle("");
                 }
             }

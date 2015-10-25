@@ -59,7 +59,7 @@ String getData() {
   result += "rain="     + String(getRain())         + "&";
   result += "windDir="  + getWindDir()              + "&";
   result += "wind="     + String(getWindPower())         ;
-  return "Hello World";
+  return result;
 }
 
 void setup()
