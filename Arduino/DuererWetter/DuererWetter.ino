@@ -1,7 +1,7 @@
 //GSM
 #include <GSM.h>
 
-#define GSM_PIN 0
+#define GSM_PIN        "3512"
 #define GPRS_APN       "pinternet.interkom.de"
 #define GPRS_LOGIN     ""
 #define GPRS_PASSWORD  ""
@@ -86,9 +86,8 @@ void setup()
   if (client.connect(server, port)) {
     Serial.println("connected");
     // Make a HTTP-Post request:
-    client.println("POST /uploadData HTTP/1.1");
+    client.println("POST /postWeather HTTP/1.1");
     client.println("Host: wetterstation-duerer.rhcloud.com");
-    client.println("User-Agent: Arduino/1.0");
     client.println("Connection: close");
     client.print("Content-Length: ");
     client.println(postData.length());
